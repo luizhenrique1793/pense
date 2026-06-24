@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Pense Assino — comunicação 360°, branding, marketing, audiovisual e mídia." />
+    <title>Pense Assino — Comunicação 360°</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero" id="inicio">
+      <nav class="nav container" aria-label="Navegação principal">
+        <a class="brand" href="#inicio" aria-label="Pense Assino — início">
+          <span>PEN</span><span>SE<i></i></span>
+        </a>
+
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-menu">
+          <span></span><span></span>
+          <span class="sr-only">Abrir menu</span>
+        </button>
+
+        <div class="nav-links" id="main-menu">
+          <a href="#cases">Cases</a>
+          <a href="solucoes.html">Soluções</a>
+          <a href="sobre.html">Sobre</a>
+          <a href="#insights">Insights</a>
+          <a href="#contato">Contato</a>
+        </div>
+
+        <a class="nav-cta" href="#contato">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.5 3.5A11.8 11.8 0 0 0 12.08 0C5.52 0 .18 5.34.18 11.9c0 2.1.55 4.15 1.59 5.95L.08 24l6.3-1.65a11.9 11.9 0 0 0 5.7 1.45h.01C18.65 23.8 24 18.46 24 11.9c0-3.18-1.24-6.16-3.5-8.4Zm-8.42 18.3h-.01a9.9 9.9 0 0 1-5.05-1.38l-.36-.21-3.74.98 1-3.64-.24-.37a9.86 9.86 0 0 1-1.51-5.28C2.17 6.44 6.62 2 12.09 2a9.84 9.84 0 0 1 7.02 2.91A9.85 9.85 0 0 1 22 11.9c0 5.46-4.45 9.9-9.92 9.9Zm5.44-7.42c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48a9 9 0 0 1-1.66-2.07c-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.09 4.49.71.3 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"/></svg>
+          Faça um orçamento
+        </a>
+      </nav>
+
+      <div class="hero-inner container">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">Estratégia que movimenta marcas</span>
+          <h1>Comunicação <strong>360°</strong></h1>
+          <p class="hero-services">Marketing <b>•</b> Branding <b>•</b> Audiovisual <b>•</b> Mídia</p>
+          <p class="hero-description">Pensamos em estratégias, criamos campanhas, desenvolvemos conteúdos e conectamos marcas ao seu público-alvo.</p>
+        </div>
+
+        <form class="budget-form reveal" id="orcamento-form">
+          <div class="form-heading">
+            <span>Solicite um<br />orçamento</span>
+            <i aria-hidden="true"></i>
+          </div>
+          <label>
+            <span>Nome</span>
+            <input type="text" name="nome" placeholder="Como podemos te chamar?" required />
+          </label>
+          <label>
+            <span>Empresa</span>
+            <input type="text" name="empresa" placeholder="Qual é a sua empresa?" required />
+          </label>
+          <label>
+            <span>WhatsApp</span>
+            <input type="tel" name="whatsapp" placeholder="(00) 00000-0000" inputmode="tel" required />
+          </label>
+          <button type="submit">Quero conversar <span>↗</span></button>
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+
+      <a class="scroll-cue" href="#cases"><span>Role para descobrir</span><i></i></a>
+    </header>
+
+    <main>
+      <section class="cases section" id="cases">
+        <div class="cases-title reveal">Conheça alguns de nossos cases</div>
+
+        <div class="case-grid reveal">
+          <button class="case-tile" type="button" data-project="punta"><img src="imagens/cases/Rectangle 6.png" alt="Projeto de identidade visual Punta del Este" /><span class="case-overlay"><strong>Punta del Este</strong><small>Identidade que traduz sofisticação e experiência náutica.</small><i>Ver projeto ↗</i></span></button>
+          <button class="case-tile" type="button" data-project="jaecoo"><img src="imagens/cases/Base.png" alt="Projeto de comunicação visual JAECOO" /><span class="case-overlay"><strong>JAECOO</strong><small>Comunicação de marca para uma presença marcante.</small><i>Ver projeto ↗</i></span></button>
+          <button class="case-tile" type="button" data-project="silomax"><img src="imagens/cases/Base-1.png" alt="Campanha digital Silomax" /><span class="case-overlay"><strong>Silomax</strong><small>Estratégia digital conectada ao campo e à inovação.</small><i>Ver projeto ↗</i></span></button>
+          <button class="case-tile" type="button" data-project="sucatto"><img src="imagens/cases/Base-2.png" alt="Campanha institucional para o agronegócio" /><span class="case-overlay"><strong>Sucatto</strong><small>Posicionamento institucional para soluções agrícolas.</small><i>Ver projeto ↗</i></span></button>
+          <button class="case-tile" type="button" data-project="queens"><img src="imagens/cases/Base-3.png" alt="Campanhas para cervejas Queen's" /><span class="case-overlay"><strong>Queen's</strong><small>Conteúdo que transforma sabor em personalidade.</small><i>Ver projeto ↗</i></span></button>
+          <button class="case-tile" type="button" data-project="lidermax"><img src="imagens/cases/Campanha Publicitária Onde os Sonhos Acontecem.png" alt="Campanha Onde os Sonhos Acontecem" /><span class="case-overlay"><strong>Lidermax</strong><small>Campanha publicitária “Onde os sonhos acontecem”.</small><i>Ver projeto ↗</i></span></button>
+          <button class="case-tile" type="button" data-project="queens"><img src="imagens/cases/Base-4.png" alt="Embalagem Queen's Framboesa" /><span class="case-overlay"><strong>Queen's Framboesa</strong><small>Design de embalagem com apelo, frescor e identidade.</small><i>Ver projeto ↗</i></span></button>
+          <button class="case-tile" type="button" data-project="nautico"><img src="imagens/cases/Base-5.png" alt="Campanha comemorativa de 30 anos" /><span class="case-overlay"><strong>30 anos no mundo náutico</strong><small>Campanha comemorativa que celebra uma trajetória.</small><i>Ver projeto ↗</i></span></button>
+          <button class="case-tile" type="button" data-project="punta"><img src="imagens/cases/Base-6.png" alt="Campanha Punta del Este" /><span class="case-overlay"><strong>Punta del Este</strong><small>Campanha de marca feita para viver bons momentos.</small><i>Ver projeto ↗</i></span></button>
+          <button class="case-tile" type="button" data-project="punta"><img src="imagens/cases/Base-7.png" alt="Conteúdo digital Embarque" /><span class="case-overlay"><strong>Embarque</strong><small>Conteúdo digital inspirado em experiências no mar.</small><i>Ver projeto ↗</i></span></button>
+          <button class="case-tile" type="button" data-project="jandaia"><img src="imagens/cases/Base-8.png" alt="Conteúdo digital Café Jandaia" /><span class="case-overlay"><strong>Café Jandaia</strong><small>Gestão de conteúdo com sabor, afeto e consistência.</small><i>Ver projeto ↗</i></span></button>
+          <button class="case-tile" type="button" data-project="prime"><img src="imagens/cases/Base-9.png" alt="Campanha de lançamento Colégio Prime" /><span class="case-overlay"><strong>Colégio Prime</strong><small>Campanha OOH para o lançamento do Ensino Fundamental.</small><i>Ver projeto ↗</i></span></button>
+          <button class="case-tile" type="button" data-project="jandaia"><img src="imagens/cases/Base-10.png" alt="Website Café Jandaia" /><span class="case-overlay"><strong>Café Jandaia</strong><small>Experiência digital para aproximar marca e consumidor.</small><i>Ver projeto ↗</i></span></button>
+          <button class="case-tile" type="button" data-project="queens"><img src="imagens/cases/Base-11.png" alt="Linha de produtos Queen's" /><span class="case-overlay"><strong>Queen's</strong><small>Arquitetura visual para uma linha completa de produtos.</small><i>Ver projeto ↗</i></span></button>
+          <button class="case-tile" type="button" data-project="silomax"><img src="imagens/cases/Base-12.png" alt="Comunicação digital Silomax" /><span class="case-overlay"><strong>Silomax</strong><small>Conteúdo técnico transformado em comunicação acessível.</small><i>Ver projeto ↗</i></span></button>
+          <button class="case-tile" type="button" data-project="paris"><img src="imagens/cases/Base-13.png" alt="Campanha Residencial Paris" /><span class="case-overlay"><strong>Residencial Paris</strong><small>Campanha de lançamento focada em desejo e oportunidade.</small><i>Ver projeto ↗</i></span></button>
+        </div>
+
+        <div class="center-link"><a href="#contato">Ver todos <span>◆</span></a></div>
+      </section>
+
+      <section class="about" id="sobre">
+        <div class="about-inner container reveal">
+          <span class="section-index section-index--light">02 / Sobre</span>
+          <div>
+            <h2>Somos especialistas<br />em <em>comunicação.</em></h2>
+            <p>Atuamos de forma integrada. Unimos estratégias de marketing digital com expertise em publicidade, design e inovação em produção de vídeos e fotografia. Sua comunicação inteira, pensando junto.</p>
+            <a class="outline-button" href="#contato">Vamos trabalhar juntos? <span>↗</span></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="showreel" aria-label="Showreel Pense Assino">
+        <div class="showreel-content reveal">
+          <span>Ideias precisam<br />ser <em>sentidas.</em></span>
+          <button type="button" class="play-button" aria-label="Reproduzir showreel">
+            <svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="39"/><path d="m33 27 22 13-22 13Z"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <section class="solutions section" id="solucoes">
+        <div class="container solutions-layout">
+          <div class="solutions-intro reveal">
+            <span class="section-index">03 / Soluções</span>
+            <h2>Estratégia sem<br />execução é só<br /><em>uma boa ideia.</em></h2>
+          </div>
+          <div class="solution-list reveal">
+            <article class="solution-item open">
+              <button type="button" aria-expanded="true"><span>01</span><strong>Branding</strong><i>−</i></button>
+              <div class="solution-detail"><p>Posicionamento, identidade visual e narrativas que transformam percepção em valor de marca.</p></div>
+            </article>
+            <article class="solution-item">
+              <button type="button" aria-expanded="false"><span>02</span><strong>Marketing digital</strong><i>+</i></button>
+              <div class="solution-detail"><p>Conteúdo, mídia e performance conectados para gerar atenção, relacionamento e conversão.</p></div>
+            </article>
+            <article class="solution-item">
+              <button type="button" aria-expanded="false"><span>03</span><strong>Audiovisual</strong><i>+</i></button>
+              <div class="solution-detail"><p>Filmes, campanhas e fotografia com direção criativa e acabamento que fazem sua marca ser lembrada.</p></div>
+            </article>
+            <article class="solution-item">
+              <button type="button" aria-expanded="false"><span>04</span><strong>Mídia & performance</strong><i>+</i></button>
+              <div class="solution-detail"><p>Planejamento e gestão de mídia orientados por dados, testes e oportunidades reais de crescimento.</p></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="analysis" id="contato">
+        <div class="container analysis-layout">
+          <div class="analysis-copy reveal">
+            <span class="section-index section-index--light">04 / Vamos conversar</span>
+            <h2>Solicite uma análise<br />de sua <em>comunicação.</em></h2>
+            <p>Descubra em que caminho sua empresa está. Realizamos um diagnóstico inicial, sem compromisso.</p>
+          </div>
+          <form class="analysis-form reveal">
+            <label><span>Nome</span><input type="text" name="nome" required /></label>
+            <label><span>E-mail</span><input type="email" name="email" required /></label>
+            <label class="full"><span>Mensagem</span><textarea name="mensagem" rows="3" required></textarea></label>
+            <button type="submit">Solicitar análise <span>↗</span></button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="clients" aria-label="Alguns de nossos clientes">
+        <div class="client-strip reveal">
+          <button type="button" aria-label="Clientes anteriores">‹</button>
+          <div class="logo-row">
+            <img src="imagens/secao_logoclientes/Logo Silomax.png" alt="Silomax" />
+            <img src="imagens/secao_logoclientes/intermidia.png" alt="Intermidia" />
+            <img src="imagens/secao_logoclientes/cafe jandaia.png" alt="Café Jandaia" />
+            <img src="imagens/secao_logoclientes/casa_grande_logo 1.png" alt="Casa Grande Imobiliária" />
+            <img src="imagens/secao_logoclientes/ipiranga.png" alt="Escritório Ipiranga" />
+            <img src="imagens/secao_logoclientes/Logo_Punta_Branca 1.png" alt="Punta del Este" />
+          </div>
+          <button type="button" aria-label="Próximos clientes">›</button>
+        </div>
+      </section>
+
+      <section class="testimonials" id="insights" aria-label="Depoimentos de clientes">
+        <div class="testimonial-grid reveal">
+          <img src="imagens/secao_falacliente/fala_cliente_01.png" alt="Depoimento Fala Cliente" />
+          <img src="imagens/secao_falacliente/515373466_18064724948131794_2713327672872573015_n.png" alt="Depoimento Fala Cliente" />
+          <img src="imagens/secao_falacliente/503942728_18061974323131794_5408323875126567480_n.png" alt="Depoimento Fala Cliente" />
+        </div>
+      </section>
+    </main>
+
+    <div class="project-modal" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" hidden>
+      <div class="project-modal-panel">
+        <header class="project-modal-header">
+          <div><span id="project-modal-category">Cases • Campanhas</span><h2 id="project-modal-title"></h2><p id="project-modal-description"></p></div>
+          <button class="project-modal-close" type="button" aria-label="Fechar projeto">×</button>
+        </header>
+        <div class="project-modal-gallery" id="project-modal-gallery"></div>
+        <div class="project-modal-cta"><h3>Vamos trabalhar juntos?</h3><a href="#contato">Fale com a gente ↗</a></div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container footer-main">
+        <div class="footer-about">
+          <h2>Pense Assim</h2>
+          <p>Transformamos conteúdo em design, fotografia, vídeo, publicidade e comunicação de resultados por meio do engajamento online. Temos uma completa assessoria na área de marketing e pensamos o seu negócio para que seus potenciais clientes se lembrem dele em suas decisões de consumo.</p>
+          <div class="social-links" aria-label="Redes sociais">
+            <a href="#" aria-label="Facebook">f</a>
+            <a href="#" aria-label="Instagram">◎</a>
+            <a href="#" aria-label="YouTube">▶</a>
+            <a href="#" aria-label="LinkedIn">in</a>
+          </div>
+        </div>
+
+        <div class="footer-contact">
+          <h2>Contatos</h2>
+          <dl>
+            <div><dt>WhatsApp</dt><dd>+55 43 9161-9048</dd></div>
+            <div><dt>Email</dt><dd>fabio@penseassim.com.br</dd></div>
+            <div><dt>Endereço</dt><dd>Rua Dr. Elias Cesar, 55 -<br />sala 501, Londrina - PR</dd></div>
+          </dl>
+        </div>
+      </div>
+      <div class="footer-legal">
+        <div class="container footer-bottom">
+          <span>© Copyright 2025 by <strong>Pense</strong></span>
+          <span class="developed">Desenvolvido por: <b class="mini-brand">PEN<br />SE</b></span>
+          <span>Política de Privacidade · Relatório de Transparência e Igualdade Salarial <small>(Lei 9610 de 19/02/1998)</small></span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

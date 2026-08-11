@@ -2,21 +2,24 @@
 import { site } from '~/data/site'
 
 const pageDescription = 'Soluções integradas de marketing, design, conteúdo, tráfego pago e mídia para marcas que precisam crescer com consistência.'
+const solutionsUrl = `${site.url}/solucoes/`
 
 useSeoMeta({
-  title: 'Soluções — Pense Assim',
+  title: 'Soluções de Comunicação, Marketing e Branding | Pense Assim',
   description: pageDescription,
-  ogTitle: 'Soluções — Pense Assim',
+  ogTitle: 'Soluções de Comunicação, Marketing e Branding | Pense Assim',
   ogDescription: pageDescription,
   ogType: 'website',
-  ogUrl: `${site.url}/solucoes`,
-  twitterCard: 'summary',
-  twitterTitle: 'Soluções — Pense Assim',
-  twitterDescription: pageDescription
+  ogUrl: solutionsUrl,
+  ogImage: site.defaultOgImage,
+  twitterCard: 'summary_large_image',
+  twitterTitle: 'Soluções de Comunicação, Marketing e Branding | Pense Assim',
+  twitterDescription: pageDescription,
+  twitterImage: site.defaultOgImage
 })
 
 useHead({
-  link: [{ rel: 'canonical', href: `${site.url}/solucoes` }]
+  link: [{ rel: 'canonical', href: solutionsUrl }]
 })
 
 const services = [
@@ -60,5 +63,6 @@ const services = [
     </main>
 
     <SiteFooter />
+    <FloatingWhatsApp />
   </div>
 </template>

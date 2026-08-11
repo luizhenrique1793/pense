@@ -88,7 +88,7 @@ onBeforeUnmount(() => {
             <ul>
               <li v-for="service in project.services" :key="service">{{ service }}</li>
             </ul>
-            <NuxtLink class="project-page-link" :to="`/cases/${project.id}`" @click="close">Ver página completa do projeto →</NuxtLink>
+            <NuxtLink class="project-page-link" :to="`/cases/${project.id}/`" @click="close">Ver página completa do projeto →</NuxtLink>
           </aside>
 
           <div class="project-modal-gallery">

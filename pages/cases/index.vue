@@ -2,19 +2,19 @@
 import { caseTiles, projects } from '~/data/projects'
 import { site } from '~/data/site'
 
-const casesUrl = `${site.url}/cases`
+const casesUrl = `${site.url}/cases/`
 const projectList = Object.values(projects)
 
 useSeoMeta({
-  title: 'Cases — Pense Assim',
+  title: 'Cases de Branding, Marketing e Comunicação | Pense Assim',
   description: 'Conheça projetos de branding, campanhas, conteúdo, audiovisual e marketing digital desenvolvidos pela Pense Assim.',
-  ogTitle: 'Cases — Pense Assim',
+  ogTitle: 'Cases de Branding, Marketing e Comunicação | Pense Assim',
   ogDescription: 'Uma seleção de cases da Pense Assim em comunicação 360°, branding, campanhas, conteúdo e mídia.',
   ogType: 'website',
   ogUrl: casesUrl,
   ogImage: `${site.url}/imagens/cases/Base-1.png`,
   twitterCard: 'summary_large_image',
-  twitterTitle: 'Cases — Pense Assim',
+  twitterTitle: 'Cases de Branding, Marketing e Comunicação | Pense Assim',
   twitterDescription: 'Projetos de comunicação 360°, branding, campanhas, conteúdo e mídia.',
   twitterImage: `${site.url}/imagens/cases/Base-1.png`
 })
@@ -36,7 +36,7 @@ useHead({
             '@type': 'ListItem',
             position: index + 1,
             name: project.title,
-            url: `${site.url}/cases/${project.id}`
+            url: `${site.url}/cases/${project.id}/`
           }))
         }
       })
@@ -68,7 +68,7 @@ useHead({
             v-for="tile in caseTiles"
             :key="`${tile.projectId}-${tile.image}`"
             class="case-tile case-tile--link"
-            :to="`/cases/${tile.projectId}`"
+            :to="`/cases/${tile.projectId}/`"
           >
             <img :src="tile.image" :alt="tile.alt" loading="lazy" decoding="async">
             <span class="case-overlay">
@@ -90,5 +90,6 @@ useHead({
     </main>
 
     <SiteFooter />
+    <FloatingWhatsApp />
   </div>
 </template>

@@ -10,7 +10,7 @@ useSeoMeta({
 })
 
 useHead({
-  link: [{ rel: 'canonical', href: `${site.url}/obrigado` }]
+  link: [{ rel: 'canonical', href: `${site.url}/obrigado/` }]
 })
 
 const sourceLabel = computed(() => {
@@ -43,5 +43,6 @@ const sourceLabel = computed(() => {
     </main>
 
     <SiteFooter />
+    <FloatingWhatsApp />
   </div>
 </template>

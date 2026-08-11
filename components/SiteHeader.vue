@@ -20,7 +20,9 @@ onBeforeUnmount(() => {
 <template>
   <header :class="inner ? 'page-hero' : 'hero'">
     <nav class="nav site-nav container" aria-label="Navegação principal">
-      <NuxtLink class="brand" to="/" aria-label="Pense Assim — início"><span>PEN</span><span>SE<i /></span></NuxtLink>
+      <NuxtLink class="brand" to="/" aria-label="Pense Assim — início">
+        <img src="/imagens/pense-logo-white.png" alt="Pense Assim">
+      </NuxtLink>
       <button class="menu-toggle" :class="{ open }" type="button" :aria-expanded="open" aria-controls="main-menu" @click="open = !open">
         <span />
         <span />
@@ -29,9 +31,9 @@ onBeforeUnmount(() => {
       </button>
       <div id="main-menu" class="nav-links" :class="{ open }">
         <span class="mobile-menu-label">Menu</span>
-        <NuxtLink to="/cases" @click="open = false">Cases</NuxtLink>
-        <NuxtLink to="/solucoes" @click="open = false">Soluções</NuxtLink>
-        <NuxtLink to="/sobre" @click="open = false">Sobre</NuxtLink>
+        <NuxtLink to="/cases/" @click="open = false">Cases</NuxtLink>
+        <NuxtLink to="/solucoes/" @click="open = false">Soluções</NuxtLink>
+        <NuxtLink to="/sobre/" @click="open = false">Sobre</NuxtLink>
         <NuxtLink to="/#insights" @click="open = false">Insights</NuxtLink>
         <NuxtLink to="/#contato" @click="open = false">Contato</NuxtLink>
         <NuxtLink class="mobile-menu-cta" to="/#contato" @click="open = false">Faça um orçamento →</NuxtLink>

@@ -6,17 +6,17 @@ const route = useRoute()
 const router = useRouter()
 
 useSeoMeta({
-  title: 'Pense Assim — Comunicação 360°',
+  title: 'Pense Assim | Comunicação 360° em Londrina',
   description: site.description,
-  ogTitle: 'Pense Assim — Comunicação 360°',
+  ogTitle: 'Pense Assim | Comunicação 360° em Londrina',
   ogDescription: site.description,
   ogType: 'website',
   ogUrl: `${site.url}/`,
-  ogImage: `${site.url}/imagens/cases/Base-1.png`,
+  ogImage: site.defaultOgImage,
   twitterCard: 'summary_large_image',
-  twitterTitle: 'Pense Assim — Comunicação 360°',
+  twitterTitle: 'Pense Assim | Comunicação 360° em Londrina',
   twitterDescription: site.description,
-  twitterImage: `${site.url}/imagens/cases/Base-1.png`
+  twitterImage: site.defaultOgImage
 })
 
 useHead({
@@ -26,21 +26,35 @@ useHead({
       type: 'application/ld+json',
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
-        '@type': 'ProfessionalService',
-        name: site.name,
-        url: site.url,
-        description: site.description,
-        telephone: site.phone,
-        email: site.email,
-        address: {
-          '@type': 'PostalAddress',
-          streetAddress: 'Rua Dr. Elias Cesar, 55 - sala 501',
-          addressLocality: 'Londrina',
-          addressRegion: 'PR',
-          addressCountry: 'BR'
-        },
-        areaServed: 'Brasil',
-        serviceType: ['Comunicação 360°', 'Branding', 'Marketing digital', 'Audiovisual', 'Mídia']
+        '@graph': [
+          {
+            '@type': 'ProfessionalService',
+            '@id': `${site.url}/#organization`,
+            name: site.name,
+            url: site.url,
+            image: site.defaultOgImage,
+            description: site.description,
+            telephone: site.phone,
+            email: site.email,
+            address: {
+              '@type': 'PostalAddress',
+              streetAddress: 'Rua Dr. Elias Cesar, 55 - sala 501',
+              addressLocality: 'Londrina',
+              addressRegion: 'PR',
+              addressCountry: 'BR'
+            },
+            areaServed: 'Brasil',
+            serviceType: ['Comunicação 360°', 'Branding', 'Marketing digital', 'Audiovisual', 'Mídia']
+          },
+          {
+            '@type': 'WebSite',
+            '@id': `${site.url}/#website`,
+            name: site.name,
+            url: `${site.url}/`,
+            inLanguage: 'pt-BR',
+            publisher: { '@id': `${site.url}/#organization` }
+          }
+        ]
       })
     },
     {
@@ -85,7 +99,15 @@ const analysisName = ref('')
 const analysisCompany = ref('')
 const analysisWhatsapp = ref('')
 const showVideo = ref(false)
+const testimonialViewport = ref<HTMLElement | null>(null)
+const testimonials = [
+  { src: '/imagens/secao_falacliente/fala_cliente_01.png', alt: 'Depoimento de Wesley Carneiro' },
+  { src: '/imagens/secao_falacliente/515373466_18064724948131794_2713327672872573015_n.png', alt: 'Depoimento de Gabriela Sanches' },
+  { src: '/imagens/secao_falacliente/503942728_18061974323131794_5408323875126567480_n.png', alt: 'Depoimento de André Garcia' }
+]
 let stopClientLogoControls: (() => void) | null = null
+let testimonialTimer: ReturnType<typeof setInterval> | null = null
+let testimonialPosition = 0
 const whatsappTarget = '5543991619048'
 const youtubeEmbedUrl = 'https://www.youtube-nocookie.com/embed/Xn5I8aXe70w?autoplay=1&rel=0&modestbranding=1'
 
@@ -128,7 +150,7 @@ function goToThanks(source: string) {
     const value = route.query[key]
     if (typeof value === 'string' && value) query[key] = value
   }
-  router.push({ path: '/obrigado', query })
+  router.push({ path: '/obrigado/', query })
 }
 
 function formatPhone(value: string) {
@@ -207,6 +229,43 @@ function scrollClients(direction: -1 | 1) {
   row.scrollBy({ left: distance * direction, behavior: 'smooth' })
 }
 
+function scrollTestimonials(direction: -1 | 1) {
+  const viewport = testimonialViewport.value
+  const firstCard = viewport?.querySelector<HTMLElement>('.testimonial-card')
+  if (!viewport || !firstCard) return
+
+  const gap = Number.parseFloat(getComputedStyle(firstCard.parentElement!).gap) || 24
+  const step = firstCard.getBoundingClientRect().width + gap
+  const total = testimonials.length
+
+  if (direction === 1) {
+    if (testimonialPosition === total) {
+      viewport.scrollTo({ left: 0, behavior: 'auto' })
+      testimonialPosition = 0
+    }
+    testimonialPosition += 1
+  } else {
+    if (testimonialPosition === 0) {
+      viewport.scrollTo({ left: step * total, behavior: 'auto' })
+      testimonialPosition = total
+    }
+    testimonialPosition -= 1
+  }
+
+  requestAnimationFrame(() => viewport.scrollTo({ left: step * testimonialPosition, behavior: 'smooth' }))
+}
+
+function startTestimonialsAutoplay() {
+  if (!import.meta.client || window.matchMedia('(prefers-reduced-motion: reduce)').matches || testimonialTimer) return
+  testimonialTimer = window.setInterval(() => scrollTestimonials(1), 6500)
+}
+
+function stopTestimonialsAutoplay() {
+  if (!testimonialTimer) return
+  window.clearInterval(testimonialTimer)
+  testimonialTimer = null
+}
+
 onMounted(() => {
   const buttons = document.querySelectorAll<HTMLButtonElement>('.client-strip > button')
   const previous = buttons[0]
@@ -224,10 +283,13 @@ onMounted(() => {
     previous.removeEventListener('click', goPrevious)
     next.removeEventListener('click', goNext)
   }
+
+  startTestimonialsAutoplay()
 })
 
 onBeforeUnmount(() => {
   stopClientLogoControls?.()
+  stopTestimonialsAutoplay()
 })
 </script>
 
@@ -237,13 +299,16 @@ onBeforeUnmount(() => {
       <div class="hero-inner container">
         <div class="hero-copy">
           <span class="eyebrow">Estratégia que movimenta marcas</span>
-          <h1>Comunicação <strong>360°</strong></h1>
+          <h1>ANTES DE COMUNICAR,<br>A GENTE <strong>PENSA.</strong></h1>
           <p class="hero-services">Marketing <b>•</b> Branding <b>•</b> Audiovisual <b>•</b> Mídia</p>
-          <p class="hero-description">Pensamos em estratégias, criamos campanhas, desenvolvemos conteúdos e conectamos marcas ao seu público-alvo.</p>
+          <p class="hero-description">Estratégias, planejamento e produção audiovisual para construir marcas mais fortes.</p>
         </div>
 
         <form class="budget-form" aria-label="Solicite um orçamento" @submit.prevent="submitBudgetForm">
-          <div class="form-heading"><span>Solicite um<br>orçamento</span><i /></div>
+          <div class="form-heading">
+            <span>Solicite um<br>orçamento</span>
+            <small>Vamos conversar</small>
+          </div>
           <label><span>Nome</span><input v-model="budgetName" name="nome" type="text" placeholder="Como podemos te chamar?" autocomplete="name" required></label>
           <label><span>Empresa</span><input v-model="budgetCompany" name="empresa" type="text" placeholder="Qual é a sua empresa?" autocomplete="organization" required></label>
           <label><span>WhatsApp</span><input v-model="whatsapp" name="whatsapp" type="tel" placeholder="(00) 00000-0000" autocomplete="tel" required @input="maskPhone"></label>
@@ -267,7 +332,7 @@ onBeforeUnmount(() => {
           <div>
             <h2 id="home-about-title">Somos especialistas<br>em <em>comunicação.</em></h2>
             <p>Atuamos de forma integrada. Unimos estratégias de marketing digital com expertise em publicidade, design e inovação em produção de vídeos e fotografia. Sua comunicação inteira, pensando junto.</p>
-            <NuxtLink class="outline-button" to="/sobre">Conheça a Pense <span>→</span></NuxtLink>
+            <NuxtLink class="outline-button" to="/sobre">Saiba mais <span>→</span></NuxtLink>
           </div>
         </div>
       </section>
@@ -275,8 +340,11 @@ onBeforeUnmount(() => {
       <section class="showreel" aria-label="Showreel Pense Assim">
         <div class="showreel-content">
           <span>Ideias precisam<br>ser <em>sentidas.</em></span>
-          <button type="button" class="play-button" aria-label="Reproduzir showreel" @click="openVideo">
-            <svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="39" /><path d="m33 27 22 13-22 13Z" /></svg>
+          <button type="button" class="play-button" aria-label="Assistir ao showreel da Pense Assim" @click="openVideo">
+            <span class="play-button-circle">
+              <svg viewBox="0 0 80 80" aria-hidden="true"><circle cx="40" cy="40" r="39" /><path d="m33 27 22 13-22 13Z" /></svg>
+            </span>
+            <span class="play-button-label">Assistir ao showreel</span>
           </button>
         </div>
       </section>
@@ -293,6 +361,9 @@ onBeforeUnmount(() => {
                 ['Branding', 'Posicionamento, identidade visual e narrativas que transformam percepção em valor.'],
                 ['Marketing digital', 'Conteúdo, mídia e performance conectados para gerar atenção e conversão.'],
                 ['Audiovisual', 'Filmes, campanhas e fotografia com direção criativa.'],
+                ['Design gráfico', 'Criações visuais que reforçam a identidade da sua marca com impacto e coerência.'],
+                ['Gestão de conteúdo', 'Conteúdo estratégico para engajar, informar e fortalecer sua marca.'],
+                ['Tráfego pago', 'Gestão de anúncios para atrair, converter e escalar resultados.'],
                 ['Mídia & performance', 'Planejamento orientado por dados e oportunidades reais.']
               ]"
               :key="item[0]"
@@ -344,10 +415,14 @@ onBeforeUnmount(() => {
       </section>
 
       <section id="insights" class="testimonials" aria-label="Fala cliente">
-        <div class="testimonial-grid">
-          <img src="/imagens/secao_falacliente/fala_cliente_01.png" alt="Depoimento de Wesley Carneiro" loading="lazy" decoding="async">
-          <img src="/imagens/secao_falacliente/515373466_18064724948131794_2713327672872573015_n.png" alt="Depoimento de Gabriela Sanches" loading="lazy" decoding="async">
-          <img src="/imagens/secao_falacliente/503942728_18061974323131794_5408323875126567480_n.png" alt="Depoimento de André Garcia" loading="lazy" decoding="async">
+        <div class="testimonial-carousel">
+          <button class="testimonial-arrow" type="button" aria-label="Depoimentos anteriores" @click="scrollTestimonials(-1)">‹</button>
+          <div ref="testimonialViewport" class="testimonial-viewport" @pointerenter="stopTestimonialsAutoplay" @pointerleave="startTestimonialsAutoplay">
+            <div class="testimonial-track">
+              <img v-for="(testimonial, index) in [...testimonials, ...testimonials]" :key="`${testimonial.src}-${index}`" class="testimonial-card" :src="testimonial.src" :alt="testimonial.alt" loading="lazy" decoding="async">
+            </div>
+          </div>
+          <button class="testimonial-arrow" type="button" aria-label="Próximos depoimentos" @click="scrollTestimonials(1)">›</button>
         </div>
       </section>
     </main>
@@ -372,7 +447,9 @@ onBeforeUnmount(() => {
     </Teleport>
     <a class="floating-whatsapp" :href="floatingWhatsappUrl" target="_blank" rel="noopener" aria-label="Conversar pelo WhatsApp" @click="trackFloatingWhatsApp">
       <span>WhatsApp</span>
-      <i>→</i>
+      <i aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M19.05 4.94A9.86 9.86 0 0 0 12.03 2C6.55 2 2.1 6.45 2.1 11.93c0 1.75.46 3.45 1.33 4.95L2 22l5.26-1.38a9.94 9.94 0 0 0 4.76 1.21h.01c5.47 0 9.92-4.45 9.92-9.93 0-2.65-1.03-5.14-2.9-6.96Zm-7.02 15.2a8.18 8.18 0 0 1-4.17-1.14l-.3-.18-3.12.82.83-3.04-.2-.32a8.16 8.16 0 0 1-1.25-4.35c0-4.5 3.67-8.17 8.2-8.17 2.19 0 4.25.85 5.8 2.4a8.13 8.13 0 0 1 2.39 5.78c0 4.51-3.67 8.2-8.18 8.2Zm4.49-6.12c-.25-.13-1.49-.73-1.72-.81-.23-.08-.4-.13-.57.12-.16.24-.65.8-.79.97-.15.17-.3.19-.55.06-.25-.12-1.05-.38-2-1.22a7.5 7.5 0 0 1-1.38-1.72c-.14-.24-.01-.37.11-.49l.38-.44c.12-.13.16-.23.24-.39.08-.16.04-.3-.02-.43-.06-.12-.57-1.36-.78-1.86-.2-.48-.41-.42-.57-.42h-.48c-.16 0-.43.06-.65.3-.23.24-.86.84-.86 2.04 0 1.2.88 2.36 1 2.52.12.16 1.73 2.63 4.18 3.69.58.25 1.04.4 1.4.52.59.19 1.13.16 1.55.1.47-.07 1.49-.6 1.7-1.18.2-.58.2-1.08.14-1.18-.06-.1-.22-.16-.47-.28Z" /></svg>
+      </i>
     </a>
   </div>
 </template>

@@ -13,7 +13,7 @@ if (!project) {
   })
 }
 
-const caseUrl = `${site.url}/cases/${project.id}`
+const caseUrl = `${site.url}/cases/${project.id}/`
 const coverImage = `${site.url}${project.images[0]}`
 
 useSeoMeta({
@@ -37,17 +37,29 @@ useHead({
       type: 'application/ld+json',
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
-        '@type': 'CreativeWork',
-        name: project.title,
-        description: project.description,
-        url: caseUrl,
-        image: coverImage,
-        creator: {
-          '@type': 'Organization',
-          name: site.name,
-          url: site.url
-        },
-        about: project.services
+        '@graph': [
+          {
+            '@type': 'CreativeWork',
+            name: project.title,
+            description: project.description,
+            url: caseUrl,
+            image: coverImage,
+            creator: {
+              '@type': 'Organization',
+              name: site.name,
+              url: site.url
+            },
+            about: project.services
+          },
+          {
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Início', item: `${site.url}/` },
+              { '@type': 'ListItem', position: 2, name: 'Cases', item: `${site.url}/cases/` },
+              { '@type': 'ListItem', position: 3, name: project.title, item: caseUrl }
+            ]
+          }
+        ]
       })
     }
   ]
@@ -92,7 +104,7 @@ const relatedCases = caseTiles.filter(tile => tile.projectId !== project.id).sli
             <h2 id="related-cases-title">Veja também</h2>
           </div>
           <div class="related-grid">
-            <NuxtLink v-for="tile in relatedCases" :key="`${tile.projectId}-${tile.image}`" :to="`/cases/${tile.projectId}`" class="related-card">
+            <NuxtLink v-for="tile in relatedCases" :key="`${tile.projectId}-${tile.image}`" :to="`/cases/${tile.projectId}/`" class="related-card">
               <img :src="tile.image" :alt="tile.alt" loading="lazy" decoding="async">
               <strong>{{ tile.title }}</strong>
             </NuxtLink>
@@ -110,5 +122,6 @@ const relatedCases = caseTiles.filter(tile => tile.projectId !== project.id).sli
     </main>
 
     <SiteFooter />
+    <FloatingWhatsApp />
   </div>
 </template>

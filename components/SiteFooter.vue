@@ -13,9 +13,9 @@
 
       <nav class="footer-links" aria-label="Links do rodapé">
         <h2>Navegação</h2>
-        <NuxtLink to="/cases">Cases</NuxtLink>
-        <NuxtLink to="/solucoes">Soluções</NuxtLink>
-        <NuxtLink to="/sobre">Sobre</NuxtLink>
+        <NuxtLink to="/cases/">Cases</NuxtLink>
+        <NuxtLink to="/solucoes/">Soluções</NuxtLink>
+        <NuxtLink to="/sobre/">Sobre</NuxtLink>
         <NuxtLink to="/#contato">Contato</NuxtLink>
       </nav>
 

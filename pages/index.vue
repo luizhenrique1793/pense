@@ -101,9 +101,49 @@ const analysisWhatsapp = ref('')
 const showVideo = ref(false)
 const testimonialViewport = ref<HTMLElement | null>(null)
 const testimonials = [
-  { src: '/imagens/secao_falacliente/fala_cliente_01.png', alt: 'Depoimento de Wesley Carneiro' },
-  { src: '/imagens/secao_falacliente/515373466_18064724948131794_2713327672872573015_n.png', alt: 'Depoimento de Gabriela Sanches' },
-  { src: '/imagens/secao_falacliente/503942728_18061974323131794_5408323875126567480_n.png', alt: 'Depoimento de André Garcia' }
+  {
+    src: '/imagens/secao_falacliente/fala_cliente_01.png',
+    name: 'Wesley Carneiro',
+    company: 'Diretor, Náutica Paraná',
+    quote: 'Nossa parceria é efetiva. A PENSE não é só cria, mas nos assessora.',
+    position: '18% top'
+  },
+  {
+    src: '/imagens/secao_falacliente/515373466_18064724948131794_2713327672872573015_n.png',
+    name: 'Gabriela Sanches',
+    company: 'Central Carnes',
+    quote: 'Estamos felizes com a parceria com a PENSE, que nos atende não só no digital, mas nos assessora em todas as ações de marketing.',
+    position: '16% top'
+  },
+  {
+    src: '/imagens/secao_falacliente/503942728_18061974323131794_5408323875126567480_n.png',
+    name: 'André Garcia',
+    company: 'Queens Cervejaria',
+    quote: 'A gente confia porque conhece de perto. Caminhamos juntos há anos e o resultado sempre foi de grande satisfação!',
+    position: '14% top'
+  }
+]
+const clientLogos = [
+  { src: '/imagens/logomarcas_clientes/260726_Abrajeep.png', alt: 'AbraJeep' },
+  { src: '/imagens/logomarcas_clientes/260726_Ademicon.png', alt: 'Ademicon' },
+  { src: '/imagens/logomarcas_clientes/260726_Aurum.png', alt: 'Aurum' },
+  { src: '/imagens/logomarcas_clientes/260726_Caentral_Carnes.png', alt: 'Central Carnes' },
+  { src: '/imagens/logomarcas_clientes/260726_Casa_Grande.png', alt: 'Casa Grande' },
+  { src: '/imagens/logomarcas_clientes/260726_Costazure.png', alt: 'Costa Azure' },
+  { src: '/imagens/logomarcas_clientes/260726_Ecovillas.png', alt: 'Ecovillas' },
+  { src: '/imagens/logomarcas_clientes/260726_Jandaia.png', alt: 'Jandaia' },
+  { src: '/imagens/logomarcas_clientes/260726_Lidermax.png', alt: 'Lidermax' },
+  { src: '/imagens/logomarcas_clientes/260726_Marajo.png', alt: 'Marajó' },
+  { src: '/imagens/logomarcas_clientes/260726_Nautica.png', alt: 'Náutica Paraná' },
+  { src: '/imagens/logomarcas_clientes/260726_Nutrivanza.png', alt: 'Nutrivanza' },
+  { src: '/imagens/logomarcas_clientes/260726_PordoSol.png', alt: 'Pôr do Sol' },
+  { src: '/imagens/logomarcas_clientes/260726_Punta.png', alt: 'Punta' },
+  { src: '/imagens/logomarcas_clientes/260726_Queens.png', alt: 'Queens Cervejaria' },
+  { src: '/imagens/logomarcas_clientes/260726_Romaliga.png', alt: 'Romaliga' },
+  { src: '/imagens/logomarcas_clientes/260726_Silomax.png', alt: 'Silomax' },
+  { src: '/imagens/logomarcas_clientes/260726_Sucatao.png', alt: 'Sucatão' },
+  { src: '/imagens/logomarcas_clientes/260726_Unimed.png', alt: 'Unimed' },
+  { src: '/imagens/logomarcas_clientes/260726_Viaer.png', alt: 'Viaer' }
 ]
 let stopClientLogoControls: (() => void) | null = null
 let testimonialTimer: ReturnType<typeof setInterval> | null = null
@@ -271,17 +311,17 @@ onMounted(() => {
   const previous = buttons[0]
   const next = buttons[1]
 
-  if (!previous || !next) return
+  if (previous && next) {
+    const goPrevious = () => scrollClients(-1)
+    const goNext = () => scrollClients(1)
 
-  const goPrevious = () => scrollClients(-1)
-  const goNext = () => scrollClients(1)
+    previous.addEventListener('click', goPrevious)
+    next.addEventListener('click', goNext)
 
-  previous.addEventListener('click', goPrevious)
-  next.addEventListener('click', goNext)
-
-  stopClientLogoControls = () => {
-    previous.removeEventListener('click', goPrevious)
-    next.removeEventListener('click', goNext)
+    stopClientLogoControls = () => {
+      previous.removeEventListener('click', goPrevious)
+      next.removeEventListener('click', goNext)
+    }
   }
 
   startTestimonialsAutoplay()
@@ -403,23 +443,35 @@ onBeforeUnmount(() => {
         <div class="client-strip">
           <button type="button" aria-label="Clientes anteriores">‹</button>
           <div class="logo-row">
-            <img src="/imagens/secao_logoclientes/Logo%20Silomax.png" alt="Silomax" loading="lazy" decoding="async">
-            <img src="/imagens/secao_logoclientes/intermidia.png" alt="Intermidia" loading="lazy" decoding="async">
-            <img src="/imagens/secao_logoclientes/cafe%20jandaia.png" alt="Café Jandaia" loading="lazy" decoding="async">
-            <img src="/imagens/secao_logoclientes/casa_grande_logo%201.png" alt="Casa Grande" loading="lazy" decoding="async">
-            <img src="/imagens/secao_logoclientes/ipiranga.png" alt="Escritório Ipiranga" loading="lazy" decoding="async">
-            <img src="/imagens/secao_logoclientes/Logo_Punta_Branca%201.png" alt="Punta del Este" loading="lazy" decoding="async">
+            <img v-for="logo in clientLogos" :key="logo.src" :src="logo.src" :alt="logo.alt" loading="lazy" decoding="async">
           </div>
           <button type="button" aria-label="Próximos clientes">›</button>
         </div>
       </section>
 
-      <section id="insights" class="testimonials" aria-label="Fala cliente">
+      <section id="insights" class="testimonials" aria-labelledby="testimonials-title">
+        <div class="testimonials-heading container">
+          <span>Quem vive a marca</span>
+          <h2 id="testimonials-title">Fala cliente</h2>
+          <p>Parcerias que se transformam em resultados.</p>
+        </div>
         <div class="testimonial-carousel">
           <button class="testimonial-arrow" type="button" aria-label="Depoimentos anteriores" @click="scrollTestimonials(-1)">‹</button>
           <div ref="testimonialViewport" class="testimonial-viewport" @pointerenter="stopTestimonialsAutoplay" @pointerleave="startTestimonialsAutoplay">
             <div class="testimonial-track">
-              <img v-for="(testimonial, index) in [...testimonials, ...testimonials]" :key="`${testimonial.src}-${index}`" class="testimonial-card" :src="testimonial.src" :alt="testimonial.alt" loading="lazy" decoding="async">
+              <article v-for="(testimonial, index) in [...testimonials, ...testimonials]" :key="`${testimonial.src}-${index}`" class="testimonial-card">
+                <div class="testimonial-photo" :style="{ backgroundImage: `url(${testimonial.src})`, backgroundPosition: testimonial.position }" role="img" :aria-label="`Retrato de ${testimonial.name}`"></div>
+                <div class="testimonial-details">
+                  <div>
+                    <strong>{{ testimonial.name }}</strong>
+                    <span>{{ testimonial.company }}</span>
+                  </div>
+                  <blockquote>
+                    <i aria-hidden="true">“</i>
+                    <p>{{ testimonial.quote }}</p>
+                  </blockquote>
+                </div>
+              </article>
             </div>
           </div>
           <button class="testimonial-arrow" type="button" aria-label="Próximos depoimentos" @click="scrollTestimonials(1)">›</button>
